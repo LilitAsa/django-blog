@@ -9,6 +9,13 @@ def categories(request):
     return HttpResponse(f"<h1> Categories </h1>")
 
 
-
 def categories_by_id(request,cat_id):
     return HttpResponse(f"<h1> Categories </h1><p>ID: {cat_id}</p>")
+
+
+def categories_by_slug(request, cat_slug=None):
+    return HttpResponse(f"<h1> Categories </h1> <p> SLUG: {cat_slug} </p>")
+
+
+def archive(request,year):
+    return HttpResponse(f"<h1> Archive </h1> <p> ARCHIVE: {year} </p>")
