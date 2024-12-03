@@ -1,15 +1,11 @@
-from django.contrib import admin
-from django.urls import path, re_path,register_converter
-from . import views, converters
-
-register_converter(converters.FourDigitYearConverter, "yyyy")
-
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("", views.index, name ="index"),
-    path("about/", views.about, name ="about"),
-    path("categories/", views.categories, name = "categories"),
-    path("categories/<int:cat_id>/", views.categories_by_id),
-    path("categories/<slug:cat_slug>/", views.categories_by_slug, name = "cat_slug"),
-    path("archive/<yyyy:year>/", views.archive)
+	path("", views.index, name="index"),
+	path("about/", views.about, name="about"),
+	path("add-post/", views.add_post, name="add_post"),
+	path("contacts/", views.contacts, name="contacts"),
+	path("login/", views.login, name="login"),
+	path("posts/<int:post_id>", views.post_more, name="posts")
 ]
