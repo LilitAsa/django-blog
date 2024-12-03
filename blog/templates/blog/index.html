@@ -6,6 +6,8 @@
         <p>{{ description }}</p>
     </header>
 
+    {% include "blog/includes/categories.html" %}
+
     <main>
         <h2>Our Latest Posts</h2>
         <ul>
@@ -23,4 +25,6 @@
             {% endfor %}
         </ul>
     </main>
+    {% include "blog/includes/categories.html" only with title2 = "Hello" %}
+
 {% endblock %}
