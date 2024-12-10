@@ -1,12 +1,10 @@
-{% load blog_tags %}
-<nav>
-
-{% get_categories as categories %}
-{% for cat in categories %}
-    <a href="{% url 'category' cat.id %}"> {{cat.name}} </a>
-{% endfor %}
-
-
-</nav>
-
-<p>{{title}}</p>
+<ul class="categories">
+  {% for cat in cats %}
+    {% if cat.id == cat.selected %}
+      <li class="active_cat">{{cat.name}}</li>
+    {% endif %}
+  <li>
+    <a class="category-item" href="{% url 'category' cat.id %}">{{cat.name}}</a>
+  </li>
+    {% endfor %}
+</ul>

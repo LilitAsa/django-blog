@@ -9,9 +9,11 @@
     <link type="text/css" rel="stylesheet" href="{% static 'blog/css/style.css' %}">
 </head>
 <body>
-    <nav>
+    <nav class="main-nav">
         <div class="container">
-            <div class="logo"></div>
+            <h1 class="logo">
+                <a href="{% url 'index' %}">Our Blog</a>
+            </h1>
             <div class="menu">
                 <ul>
                     {% for m in menu %}
@@ -24,9 +26,15 @@
         </div>
     </nav>
 
-    {% show_categories %}
-    {% block content %} {% endblock %}
-    {% block about %} {% endblock %}
+    <section class="aside_and_main container">
+        <aside>
+            <h3>Categories</h3>
+            {% show_categories cat_selected %}
+        </aside>
+        <main>
+            {% block article %} {% endblock %}
+        </main>
+    </section>
 
     <script src="{% static 'blog/js/script.js' %}"></script>
 </body>

@@ -11,7 +11,7 @@ def get_categories():
     return views.categories_from_db
 
 
-@register.inclusion_tag("blog/category.html")
-def show_categories():
+@register.inclusion_tag("blog/includes/categories.html")
+def show_categories(cat_selected=0):
     cats = views.categories_from_db
-    return {"cats": cats}
+    return {"cats": cats, "cat_selected": cat_selected}

@@ -1,9 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
-from django.template.defaultfilters import title
-from unicodedata import category
+from django.shortcuts import render, get_list_or_404
 
-from blog.templatetags.blog_tags import register
+from blog.models import Article
 
 data_from_db = [
 	{
@@ -52,23 +50,35 @@ categories_from_db = [
 
 
 def index(request):
-	data = {
-		"title": "Home Page",
-		"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-		"posts": data_from_db,
-	}
-	return render(request, "blog/home.html", data)
+	return render(request, "blog/home.html")
 
 
 def about(request):
 	return render(request, "blog/about.html", {"title": "About Page"})
 
 
-def show_more(request, post_id):
-	return render(request, "blog/read-more.html", {"title": "Read More"})
+def show_article(request, article_id):
+	article = get_list_or_404(Article, pk=article_id)
+
+	data = {
+		"title": article.title,
+		"content": article.content,
+		"time_create": article.time_create,
+		"time_update": article.time_update,
+		"is_published": article.is_published
+	}
+	return render(request, "blog/show-article.html", data)
+
 
 def show_category(request,cat_id):
-	return render(request,"blog/category.html",{"title": f"Category: {cat_id}"})
+	return render(
+		request,
+		"blog/category.html",
+		{
+			"title": categories_from_db[cat_id-1].get("name"),
+			"cat_selected": cat_id
+		 },
+	)
 
 
 def add_post(request):

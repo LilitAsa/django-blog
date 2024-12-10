@@ -59,6 +59,9 @@ hr {
   overflow: visible; /* 2 */
 }
 
+ul {
+    padding: 0;
+}
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
@@ -366,3 +369,81 @@ body {
   font-family: "m-regular", serif;
 }
 
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0px 16px;
+}
+
+nav {
+    background: orangered;
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+
+        .logo {
+            h1 {
+                a {
+                    text-decoration: none;
+                    color: #fff;
+                }
+            }
+        }
+
+        .menu {
+            ul {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+
+                li {
+                    list-style-type: none;
+
+                    a{
+                        text-decoration: none;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.aside_and_main {
+    display: flex;
+    gap: 64px;
+    justify-content: space-between;
+
+    aside {
+        width: 300px;
+        padding: 16px;
+        background: orangered;
+        color: #fff;
+
+        .categories {
+            li {
+                list-style-position: inside;
+
+                a {
+                    display: inline-block;
+                    text-decoration: none;
+                    margin-bottom: 8px;
+                    color: #fff;
+                }
+
+                a:hover {
+                    color: greenyellow;
+                }
+            }
+        }
+    }
+
+    main {
+        flex: 1;
+        border: 1px solid red;
+        padding: 16px;
+    }
+}

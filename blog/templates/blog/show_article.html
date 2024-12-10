@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block article %}
+<div>
+    <article>
+        <h1>{{title}}</h1>
+        <p>{{content}}</p>
+
+        <div>
+            <p>Published: {{time_create}}</p>
+            <p>Updates: {{time_update}}</p>
+        </div>
+    </article>
+</div>
+{% endblock %}
