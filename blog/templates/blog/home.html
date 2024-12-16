@@ -1,2 +1,19 @@
 {% extends "base.html" %}
 
+{% block latest_articles %}
+    <div class="latest_articles__block">
+        <h2>Our Latest Articles</h2>
+
+        <div class="latest_articles">
+            {% for article in articles %}
+                {% if article.is_published %}
+                    <div class="latest_articles__item">
+                        <h3>{{article.title}}</h3>
+                        <p>{{article.content|truncatewords:10}}</p>
+                        <a href="{{ article.get_absolute_url }}">read more</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

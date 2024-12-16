@@ -1,6 +1,5 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render, get_list_or_404
-
+from django.shortcuts import render, get_object_or_404
 from blog.models import Article
 
 data_from_db = [
@@ -50,15 +49,16 @@ categories_from_db = [
 
 
 def index(request):
-	return render(request, "blog/home.html")
+	articles = Article.objects.all()
+	return render(request, "blog/home.html",{"articles": articles})
 
 
 def about(request):
 	return render(request, "blog/about.html", {"title": "About Page"})
 
 
-def show_article(request, article_id):
-	article = get_list_or_404(Article, pk=article_id)
+def show_article(request, article_slug):
+	article = get_object_or_404(Article, slug = article_slug)
 
 	data = {
 		"title": article.title,

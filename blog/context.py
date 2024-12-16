@@ -21,5 +21,5 @@ def menu_context(request):
                 "link_title": "Login",
                 "link_url_name": "login"
             },
-        ]
+        ],
     }

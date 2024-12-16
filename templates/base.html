@@ -9,11 +9,14 @@
     <link type="text/css" rel="stylesheet" href="{% static 'blog/css/style.css' %}">
 </head>
 <body>
-    <nav class="main-nav">
+    <nav class="main_nav">
         <div class="container">
-            <h1 class="logo">
-                <a href="{% url 'index' %}">Our Blog</a>
-            </h1>
+            <div class="logo">
+                <h1>
+                    <a href="{% url 'index' %}">Our Blog</a>
+                </h1>
+            </div>
+
             <div class="menu">
                 <ul>
                     {% for m in menu %}
@@ -33,6 +36,7 @@
         </aside>
         <main>
             {% block article %} {% endblock %}
+            {% block latest_articles %} {% endblock %}
         </main>
     </section>
 
