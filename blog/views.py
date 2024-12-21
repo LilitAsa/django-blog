@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
-from blog.models import Article
+from unicodedata import category
+
+from blog.models import Article, Category
 
 data_from_db = [
 	{
@@ -39,15 +41,6 @@ data_from_db = [
 	}
 ]
 
-categories_from_db = [
-	{"id": 1, "name": "Traveling"},
-	{"id": 2, "name": "Sport"},
-	{"id": 3, "name": "IT & Development"},
-	{"id": 4, "name": "Cars"},
-	{"id": 5, "name": "Fashion"},
-]
-
-
 def index(request):
 	# articles = Article.objects.filter(is_published=1)
 	articles = Article.published.all()
@@ -72,15 +65,17 @@ def show_article(request, article_slug):
 	return render(request, "blog/show-article.html", data)
 
 
-def show_category(request,cat_id):
-	return render(
-		request,
-		"blog/category.html",
-		{
-			"title": categories_from_db[cat_id-1].get("name"),
-			"cat_selected": cat_id
-		 },
-	)
+def show_category(request,cat_slug):
+	category = get_object_or_404(Category, slug = cat_slug)
+	data = {
+		"name": category.name,
+		"slug": category.slug,
+		"id": category.id,
+		"items": category.items.all(),
+		"cat_selected": category.id,
+	}
+
+	return render(request,"blog/category.html", data)
 
 
 def add_post(request):
