@@ -31,13 +31,14 @@
 
     <section class="aside_and_main container">
         <aside>
-            <h3>Categories</h3>
             {% show_categories cat_selected %}
+            {% show_tags %}
         </aside>
         <main>
             {% block article %} {% endblock %}
             {% block latest_articles %} {% endblock %}
             {% block category %} {% endblock %}
+            {% block tags %} {% endblock %}
         </main>
     </section>
 

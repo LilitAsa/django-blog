@@ -5,11 +5,15 @@
         <h2>Our Latest Articles</h2>
 
         <div class="latest_articles">
-            {% for article in articles %}
+            {% for item in articles %}
                 <div class="latest_articles__item">
-                    <h3>{{article.title}}</h3>
-                    <p>{{article.content|linebreaks|truncatewords:10}}</p>
-                    <a href="{{ article.get_absolute_url }}">read more</a>
+                    <h3>{{item.title}}</h3>
+                    <div class="item__cat__date">
+                        <h5>{{item.category}}</h5>
+                        <p>{{item.time_create|date:"d-m-Y H:i:s"}}</p>
+                    </div>
+                    <p>{{item.content|linebreaks|truncatewords:10}}</p>
+                    <a href="{{ item.get_absolute_url }}">read more</a>
                 </div>
             {% endfor %}
         </div>

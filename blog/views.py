@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from unicodedata import category
 
-from blog.models import Article, Category
+from blog.models import Article, Category, ArticleTags
 
 data_from_db = [
 	{
@@ -60,22 +60,37 @@ def show_article(request, article_slug):
 		"content": article.content,
 		"time_create": article.time_create,
 		"time_update": article.time_update,
-		"is_published": article.is_published
+		"is_published": article.is_published,
+		"tags": article.tags.all()
 	}
 	return render(request, "blog/show-article.html", data)
 
 
 def show_category(request,cat_slug):
 	category = get_object_or_404(Category, slug = cat_slug)
+	articles = Article.published.filter(category_id=category.pk)
 	data = {
 		"name": category.name,
 		"slug": category.slug,
 		"id": category.id,
 		"items": category.items.all(),
-		"cat_selected": category.id,
+		"articles": articles,
+		"cat_selected": category.id
 	}
 
 	return render(request,"blog/category.html", data)
+
+
+def show_tags(request, tag_slug):
+	tag = get_object_or_404(ArticleTags, slug=tag_slug)
+	articles = tag.tags.filter(is_published=Article.Status.PUBLISHED)
+
+	data = {
+		"title": f"Tag: {tag.tag}",
+		"articles": articles,
+	}
+
+	return render(request, "blog/show-tags.html", data)
 
 
 def add_post(request):

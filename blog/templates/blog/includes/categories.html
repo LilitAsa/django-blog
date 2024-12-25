@@ -1,10 +1,12 @@
+<h2>Categories</h2>
 <ul class="categories">
-  {% for cat in cats %}
-    {% if cat.id == cat.selected %}
-      <li class="active_cat">{{cat.name}}</li>
-    {% endif %}
-  <li>
-    <a class="category-item" href="{% url 'category' cat.slug %}">{{cat.name}}</a>
-  </li>
+    {% for cat in cats %}
+        {% if cat.id == cat_selected %}
+            <li class="active_cat">{{cat.name}}</li>
+        {% else %}
+            <li>
+                <a class="category_item" href="{{ cat.get_absolute_url }}">{{cat.name}}</a>
+            </li>
+        {% endif %}
     {% endfor %}
 </ul>
