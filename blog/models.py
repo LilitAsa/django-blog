@@ -22,6 +22,7 @@ class Article(models.Model):
     is_published = models.BooleanField(Status.choices, default=Status.PUBLISHED)
     category = models.ForeignKey("Category", on_delete=models.PROTECT,related_name="items")
     tags = models.ManyToManyField("ArticleTags", blank = True, related_name="tags")
+    adv = models.OneToOneField("Adv", on_delete=models.SET_NULL, related_name="adv", null=True, blank=True)
 
 
     objects = models.Manager()
@@ -65,5 +66,12 @@ class ArticleTags(models.Model):
     def get_absolute_url(self):
         return reverse("tag", kwargs={"tag_slug": self.slug})
 
+
+class Adv(models.Model):
+    name = models.CharField(max_length=255, db_index=True)
+    budget = models.FloatField(null=True)
+
+    def __str__(self):
+        return self.name
 
 
