@@ -10,3 +10,6 @@ urlpatterns = [
 ]
 
 handler404 = page_not_found
+
+admin.site.site_header = "Blog WebSite"
+admin.site.index_title = "Blog Around the world"
